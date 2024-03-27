@@ -8,7 +8,7 @@ def draft_gpt(openai_api_key=os.environ["OPENAI_API_KEY"]):
     if openai_api_key is None:
         raise ValueError("OpenAI API key is not set in environment variables.")
 
-    with open("incident_description.txt", "r") as file:
+    with open("incident_description2.txt", "r") as file:
         incident_desc = file.read().replace("\n", "")
 
     url = "https://api.openai.com/v1/chat/completions"
@@ -21,7 +21,7 @@ def draft_gpt(openai_api_key=os.environ["OPENAI_API_KEY"]):
     data = {
         "model": "gpt-3.5-turbo",
         "messages": [
-            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "system", "content": "You are a helpful assistant. You will respond in markdown format"},
             {
                 "role": "user",
                 "content": incident_desc,
@@ -30,12 +30,16 @@ def draft_gpt(openai_api_key=os.environ["OPENAI_API_KEY"]):
     }
 
     response = requests.post(url, headers=headers, json=data)
+    response_txt = response.json()["choices"][0]["message"]["content"]
 
     # Check if the request was successful
     if response.status_code == 200:
         print("Response from OpenAI:", response.json())
         print("\n")
         print(response.json()["choices"][0]["message"]["content"])
+        print("\n")
+        with open("response.md", "w") as file:
+            file.write(response_txt)
 
     else:
         print("Error:", response.status_code, response.text)
