@@ -40,7 +40,7 @@ def draft_gpt(openai_api_key=os.environ["OPENAI_API_KEY"]):
         print("\n")
         with open("response.md", "w") as file:
             file.write(response_txt)
-
+        print('Response has been written to response.md')
     else:
         print("Error:", response.status_code, response.text)
 
