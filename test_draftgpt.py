@@ -2,13 +2,17 @@ import os
 
 import requests
 
+with open("key.txt", "r") as file:
+    openai_api_key = file.read()
 
-def draft_gpt(openai_api_key=os.environ["OPENAI_API_KEY"]):
+def draft_gpt():
+    with open("key.txt", "r") as file:
+        openai_api_key = file.read().strip()
 
     if openai_api_key is None:
         raise ValueError("OpenAI API key is not set in environment variables.")
 
-    with open("incident_description2.txt", "r") as file:
+    with open("incident_description3.txt", "r") as file:
         incident_desc = file.read().replace("\n", "")
 
     url = "https://api.openai.com/v1/chat/completions"
