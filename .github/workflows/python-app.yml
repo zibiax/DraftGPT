@@ -45,8 +45,8 @@ jobs:
       env:
         OPENAI_API_KEY: ${{github.event.inputs.chatgpt-api-key}} # ${{ secrets.OPENAI_API_KEY }}
       run: |
-       # pytest
-       # python  -c 'import test_draftgpt; test_draftgpt.draft_gpt()'
+        pytest
+        python  -c 'import test_draftgpt; test_draftgpt.draft_gpt()'
     - name: Upload Artifact
       uses: actions/upload-artifact@v3
       with:
