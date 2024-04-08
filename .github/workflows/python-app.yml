@@ -10,8 +10,8 @@ on:
       gpt-model:
         description: 'Select GPT model'
         required: true
-        default: 'gpt-4'  # Default to gpt-4 if not provided
-        options: ['gpt3-turbo', 'gpt-4', 'gpt-4-turbo']
+        default: 'gpt-3.5-turbo'  # Default to gpt-3.5-turbo if not provided
+        options: ['gpt-3.5-turbo', 'gpt-4', 'gpt-4-turbo']
 
 jobs:
   build:
