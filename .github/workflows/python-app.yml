@@ -7,11 +7,18 @@ on:
         description: 'chatgpt-api-key'
         required: false
         default: 'CHANGEME'
-      gpt-model:
-        description: 'Select GPT model'
-        required: true
-        default: 'gpt-3.5-turbo'  # Default to gpt-3.5-turbo if not provided
-        options: ['gpt-3.5-turbo', 'gpt-4', 'gpt-4-turbo']
+      gpt3-turbo:
+        description: 'Use gpt-3-turbo model'
+        required: false
+        default: true
+      gpt-4:
+        description: 'Use gpt-4 model'
+        required: false
+        default: false  # Default to true to select gpt-4 if no other option is provided
+      gpt-4-turbo:
+        description: 'Use gpt-4-turbo model'
+        required: false
+        default: false
 
 jobs:
   build:
@@ -40,7 +47,7 @@ jobs:
       - name: Test with pytest
         env:
           OPENAI_API_KEY: ${{github.event.inputs.chatgpt-api-key}}
-          GPT_MODEL: ${{github.event.inputs.gpt-model}}
+          GPT_MODEL: ${{ github.event.inputs.gpt3-turbo && 'gpt3-turbo' || github.event.inputs.gpt-4 && 'gpt-4' || github.event.inputs.gpt-4-turbo && 'gpt-4-turbo'}}
         run: |
           pytest
           python -c 'import test_draftgpt; test_draftgpt.draft_gpt()'
