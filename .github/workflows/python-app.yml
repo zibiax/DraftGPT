@@ -47,7 +47,7 @@ jobs:
       - name: Test with pytest
         env:
           OPENAI_API_KEY: ${{github.event.inputs.chatgpt-api-key}}
-          GPT_MODEL: ${{ github.event.inputs.gpt-3-turbo == true && 'gpt-3-turbo' || github.event.inputs.gpt-4 == true && 'gpt-4' || github.event.inputs.gpt-4-turbo == true && 'gpt-4-turbo'}}
+          GPT_MODEL: ${{ github.event.inputs['gpt-3-turbo'] && 'gpt-3-turbo' || github.event.inputs['gpt-4'] && 'gpt-4' || github.event.inputs['gpt-4-turbo'] && 'gpt-4-turbo'}}
         run: |
           pytest
           python -c 'import test_draftgpt; test_draftgpt.draft_gpt()'
