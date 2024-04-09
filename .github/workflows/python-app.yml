@@ -7,8 +7,8 @@ on:
         description: 'chatgpt-api-key'
         required: false
         default: 'CHANGEME'
-      gpt-3-turbo:
-        description: 'Use gpt-3-turbo model'
+      gpt-3.5-turbo:
+        description: 'Use gpt-3.5-turbo model'
         required: false
         default: true
       gpt-4:
